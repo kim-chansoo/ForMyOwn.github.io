@@ -13,51 +13,55 @@ categories: jekyll update
 
 # item 7: 다형적인 base 클래스의 destructor는 virtual로 선언하라
 
-# item 8:
+# item 8: 소멸자에서 예외를 발생시키지 말자
+미정의 동작을 할 가능성이 높아짐.
+
 
 # item 9: Construction과 destruction에서 virtual함수를 호출하지 마라
 
+
+
 # item 10: 대입 연산자는 *this 를 반환 하도록 하자.
-'''
+```
 int x, y, z;
 x = y = z = 15; // x = (y = (x = 15));
-'''
+```
 
-'''
+```
 class rigidR3D {
     public:
         rigidR3D& operator=(const rigidR3D& rhs){
             return *this;
         }
 }
-'''
+```
 
 다음과 같이 rhs와 lhs의 타입 또는 class가 같아져야 함.
 C++에서 흔히 사용하는 cout 함수도 같은 방식이라고 할 수 있음.
-'''
+```
 std::cout<< "hello" << std:endl;
-'''
+```
 
 참고로 원하는 class 를 std::cout하고 싶다면, friend함수로 선언하고 this가 아닌 ostream의 자기참조자를 반환
 
-'''
+```
 class rigidR3D {
     public:
         friend std::ostream& operator<<(std::ostream& os, const rigidR3D rhs){
             return os; // os의 자기참조자이므로 this가 아닌 os 반환
         }
 }
-'''
+```
 # item 11: 자기 대입(self-assignment) 처리를 하자
 자기 대입은 아래와 같이 사실상 일반적인 상황에서는 일어나지 않을 것 같아 보임.
-'''
+```
 class T{
 
 }
 
 T tmp_t_obj;
 tmp_t_obj = tmp_t_obj
-'''
+```
 
 대안 방법 1. 자기 자신인지 if문 테스트
 
